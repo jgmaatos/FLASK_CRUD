@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cadastros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastros Realizados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario['id'] }}</td>
+                    <td>{{ usuario['nome'] }}</td>
+                    <td>{{ usuario['email'] }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="actions">
+                        <a href="{{ url_for('editar', id=usuario['id']) }}" class="button editar">Editar</a>
+                        <a href="{{ url_for('delete', id=usuario['id']) }}" class="button deletar" onclick="return confirm('Tem certeza que deseja deletar este usuário?');">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="button">Voltar ao Cadastro</a>
+    </div>
+</body>
+</html>
